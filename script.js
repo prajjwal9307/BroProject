@@ -1,126 +1,362 @@
-// ── Instructions Array ──────────────────────────────────────────────────────
-const instructions = [
-  "Welcome! This guide will walk you through each step clearly and carefully. Let's begin.",
-  "Before you start, make sure your workspace is clean, well-lit, and free of distractions.",
-  "Gather all the materials and tools you will need before starting the process.",
-  "Read through all the instructions completely at least once before taking any action.",
-  "Always wear appropriate safety gear, such as gloves or goggles, when required.",
-  "Begin with the first step and complete it fully before moving on to the next one.",
-  "Work slowly and carefully. Rushing increases the chance of making mistakes.",
-  "If you encounter an error, stop immediately and review the previous steps.",
-  "Double-check your progress against the guide after completing each major step.",
-  "Keep your work area organized. Place tools back in their proper location after use.",
-  "If you need to take a break, make sure your work is in a safe, stable state first.",
-  "Refer to diagrams or visual aids whenever available to verify your progress.",
-  "Ask for help if you are unsure about any step. It is better to ask than to guess.",
-  "Once all steps are complete, review the final result against the expected outcome.",
-  "Congratulations! You have successfully completed all 15 instructions. Well done!"
+// ── Fixed Default Instructions ─────────────────────────
+
+const defaultInstructions = [
+  "Test Number 1",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+
+  "Test Number 2",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+
+  "Test Number 3",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+
+  "Test Number 4",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+
+  "Test Number 5",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+  "Test Number 6",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+  "Test Number 7",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+  "Test Number 8",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+  "Test Number 9",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+
+  "Test Number 10",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+  "Test Number 11",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+
+  "Test Number 12",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+  "Test Number 13",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+  "Test Number 14",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
+  "Test Number 15",
+  "50% loading over Waiting period 2 minutes started",
+  "75% loading over Waiting period 2 minutes started.",
+  "90% loading over Waiting period 2 minutes started",
+  "95% loading over Waiting period 2 minutes started",
+  "100% loading over Waiting period 5 minutes started",
+
 ];
 
-// ── State ───────────────────────────────────────────────────────────────────
-let current = 0;
+// ── Conversations Storage ──────────────────────────────
 
-// ── DOM References ──────────────────────────────────────────────────────────
-const card            = document.getElementById('card');
-const instructionText = document.getElementById('instructionText');
-const counter         = document.getElementById('counter');
-const stepNum         = document.getElementById('stepNum');
-const prevBtn         = document.getElementById('prevBtn');
-const nextBtn         = document.getElementById('nextBtn');
-const progressFill    = document.getElementById('progressFill');
-const waveBar         = document.getElementById('waveBar');
+const conversations = {
+  "Default Instructions": [...defaultInstructions]
+};
 
-// ── Render ──────────────────────────────────────────────────────────────────
-function render(animate = true) {
-  if (animate) {
-    card.classList.add('fade-out');
-    setTimeout(() => {
-      updateDOM();
-      card.classList.remove('fade-out');
-      card.classList.add('fade-in');
-      setTimeout(() => card.classList.remove('fade-in'), 400);
-    }, 300);
-  } else {
-    updateDOM();
+// ── Current State ──────────────────────────────────────
+
+let currentConversation = "Default Instructions";
+let currentIndex = 0;
+
+// ── DOM ────────────────────────────────────────────────
+
+const instructionText =
+  document.getElementById("instructionText");
+
+const counter =
+  document.getElementById("counter");
+
+const progress =
+  document.getElementById("progress");
+
+const stepNumber =
+  document.getElementById("stepNumber");
+
+const wave =
+  document.getElementById("wave");
+
+// ── Toggle Panel ───────────────────────────────────────
+
+function togglePanel(){
+
+  document
+    .getElementById("panel")
+    .classList.toggle("show");
+}
+
+// ── Render Conversation Buttons ────────────────────────
+
+function renderConversationList(){
+
+  const container =
+    document.getElementById("conversationList");
+
+  container.innerHTML = "";
+
+  for(let name in conversations){
+
+    const div = document.createElement("div");
+
+    div.className = "conversation-item";
+
+    div.innerText = name;
+
+    div.onclick = () => loadConversation(name);
+
+    container.appendChild(div);
   }
 }
 
-function updateDOM() {
-  const total = instructions.length;
-  instructionText.textContent = instructions[current];
-  counter.textContent = `Instruction ${current + 1} / ${total}`;
-  stepNum.textContent  = String(current + 1).padStart(2, '0');
-  progressFill.style.width = `${((current + 1) / total) * 100}%`;
-  prevBtn.disabled = current === 0;
-  nextBtn.disabled = current === total - 1;
+// ── Load Conversation ──────────────────────────────────
+
+function loadConversation(name){
+
+  currentConversation = name;
+
+  currentIndex = 0;
+
+  renderInstruction();
+
+  speakInstruction();
 }
 
-// ── Navigation ──────────────────────────────────────────────────────────────
-function next() {
-  if (current < instructions.length - 1) {
-    current++;
-    render();
-    setTimeout(() => speak(), 350);
+// ── Save New Conversation ──────────────────────────────
+
+function saveConversation(){
+
+  const title =
+    document.getElementById("conversationTitle")
+    .value.trim();
+
+  const text =
+    document.getElementById("instructionInput")
+    .value.trim();
+
+  if(!title || !text){
+
+    alert("Enter title and instructions");
+
+    return;
+  }
+
+  const lines = text
+    .split("\n")
+    .map(item => item.trim())
+    .filter(item => item !== "");
+
+  conversations[title] = lines;
+
+  renderConversationList();
+
+  document.getElementById("conversationTitle").value = "";
+
+  document.getElementById("instructionInput").value = "";
+}
+
+// ── Render Instruction ─────────────────────────────────
+
+function renderInstruction(){
+
+  const list =
+    conversations[currentConversation];
+
+  instructionText.innerText =
+    list[currentIndex];
+
+  counter.innerText =
+    `Instruction ${currentIndex + 1} / ${list.length}`;
+
+  stepNumber.innerText =
+    String(currentIndex + 1).padStart(2,"0");
+
+  progress.style.width =
+    ((currentIndex + 1) / list.length) * 100 + "%";
+}
+
+// ── Next ───────────────────────────────────────────────
+
+function nextInstruction(){
+
+  const list =
+    conversations[currentConversation];
+
+  if(currentIndex < list.length - 1){
+
+    currentIndex++;
+
+    renderInstruction();
+
+    speakInstruction();
   }
 }
 
-function prev() {
-  if (current > 0) {
-    current--;
-    render();
-    setTimeout(() => speak(), 350);
+// ── Previous ───────────────────────────────────────────
+
+function prevInstruction(){
+
+  if(currentIndex > 0){
+
+    currentIndex--;
+
+    renderInstruction();
+
+    speakInstruction();
   }
 }
 
-// ── Text-to-Speech ──────────────────────────────────────────────────────────
-function speak() {
-  if (!window.speechSynthesis) return;
+// ── Speak ──────────────────────────────────────────────
 
-  window.speechSynthesis.cancel();           // stop any ongoing speech
+function speakInstruction(){
 
-  const utterance = new SpeechSynthesisUtterance(instructions[current]);
-  utterance.rate   = 0.92;                   // slightly slower = clearer
-  utterance.pitch  = 1.0;
-  utterance.volume = 1.0;
+  stopSpeech();
 
-  // Prefer a natural English voice if available
-  const voices = window.speechSynthesis.getVoices();
-  const preferred = voices.find(v =>
-    v.lang.startsWith('en') && !v.name.toLowerCase().includes('google')
-  ) || voices.find(v => v.lang.startsWith('en')) || null;
-  if (preferred) utterance.voice = preferred;
+  const list =
+    conversations[currentConversation];
 
-  utterance.onstart = () => waveBar.classList.add('active');
-  utterance.onend   = () => waveBar.classList.remove('active');
-  utterance.onerror = () => waveBar.classList.remove('active');
+  const utterance =
+    new SpeechSynthesisUtterance(
+      list[currentIndex]
+    );
 
-  window.speechSynthesis.speak(utterance);
+  utterance.rate = 0.95;
+
+  utterance.onstart = () => {
+
+    wave.classList.add("active");
+  };
+
+  utterance.onend = () => {
+
+    wave.classList.remove("active");
+  };
+
+  speechSynthesis.speak(utterance);
 }
 
-// ── Voices may load asynchronously ─────────────────────────────────────────
-function init() {
-  render(false);
-  speak();
+// ── Stop ───────────────────────────────────────────────
+
+function stopSpeech(){
+
+  speechSynthesis.cancel();
+
+  wave.classList.remove("active");
 }
 
-// Some browsers fire voiceschanged before DOMContentLoaded, some after
-if (window.speechSynthesis) {
-  if (window.speechSynthesis.getVoices().length > 0) {
-    init();
-  } else {
-    window.speechSynthesis.addEventListener('voiceschanged', init, { once: true });
-    // Fallback if voiceschanged never fires
-    setTimeout(() => {
-      if (instructionText.textContent === '') init();
-    }, 1000);
-  }
-} else {
-  render(false);   // no TTS support — still render text
-}
+// ── TXT Upload ─────────────────────────────────────────
 
-// ── Keyboard Shortcuts ──────────────────────────────────────────────────────
-document.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowRight') next();
-  if (e.key === 'ArrowLeft')  prev();
-  if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); speak(); }
+document
+  .getElementById("fileInput")
+  .addEventListener("change",(e)=>{
+
+    const file = e.target.files[0];
+
+    if(!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(event){
+
+      document.getElementById(
+        "instructionInput"
+      ).value = event.target.result;
+    };
+
+    reader.readAsText(file);
 });
+
+// ── Keyboard Support ───────────────────────────────────
+
+document.addEventListener("keydown",(e)=>{
+
+  if(e.key === "ArrowRight"){
+
+    nextInstruction();
+  }
+
+  if(e.key === "ArrowLeft"){
+
+    prevInstruction();
+  }
+
+  if(e.key === " "){
+
+    e.preventDefault();
+
+    speakInstruction();
+  }
+});
+
+// ── Initial Render ─────────────────────────────────────
+
+renderConversationList();
+
+renderInstruction();
+
+speakInstruction();
