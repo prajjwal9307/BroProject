@@ -1,0 +1,266 @@
+/* ── Reset & Base ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #f0ede8;
+  --surface:   #faf8f5;
+  --ink:       #1c1a17;
+  --ink-soft:  #6b6660;
+  --accent:    #c8692a;
+  --accent-lt: #f4e6da;
+  --accent-glow: rgba(200,105,42,0.18);
+  --green:     #2e7d52;
+  --radius-card: 24px;
+  --shadow-card: 0 8px 48px rgba(28,26,23,0.12), 0 2px 8px rgba(28,26,23,0.06);
+  --transition: 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html, body {
+  height: 100%;
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  overflow: hidden;
+}
+
+/* ── Ambient Orbs ─────────────────────────────── */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+.orb-1 {
+  width: 480px; height: 480px;
+  background: radial-gradient(circle, rgba(200,105,42,0.15), transparent 70%);
+  top: -120px; right: -100px;
+  animation: driftA 12s ease-in-out infinite alternate;
+}
+.orb-2 {
+  width: 360px; height: 360px;
+  background: radial-gradient(circle, rgba(46,125,82,0.12), transparent 70%);
+  bottom: -80px; left: -80px;
+  animation: driftB 15s ease-in-out infinite alternate;
+}
+@keyframes driftA { to { transform: translate(-30px, 40px); } }
+@keyframes driftB { to { transform: translate(40px, -30px); } }
+
+/* ── Shell ────────────────────────────────────── */
+.shell {
+  position: relative;
+  z-index: 1;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 20px 24px;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+/* ── Header ───────────────────────────────────── */
+.site-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-mark {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+}
+
+.counter-badge {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-lt);
+  border-radius: 100px;
+  padding: 5px 14px;
+  letter-spacing: 0.02em;
+  transition: var(--transition);
+}
+
+/* ── Card Stage ───────────────────────────────── */
+.card-stage {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 52px 48px 44px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+  transition: opacity 0.32s ease, transform 0.32s ease;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  border: 1px solid rgba(255,255,255,0.7);
+  pointer-events: none;
+}
+
+.card.fade-out {
+  opacity: 0;
+  transform: translateY(12px) scale(0.98);
+}
+.card.fade-in {
+  animation: cardIn 0.36s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(-10px) scale(0.98); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+.step-number {
+  font-family: 'DM Serif Display', serif;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--accent-lt);
+  position: absolute;
+  top: 28px; right: 36px;
+  user-select: none;
+  letter-spacing: -0.04em;
+  transition: var(--transition);
+}
+
+.instruction-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.3rem, 3vw, 1.7rem);
+  line-height: 1.55;
+  color: var(--ink);
+  position: relative;
+  z-index: 1;
+  padding-right: 60px;
+}
+
+/* ── Wave / Speaking Indicator ────────────────── */
+.wave-bar {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 28px;
+  margin-top: 32px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.wave-bar.active { opacity: 1; }
+.wave-bar span {
+  display: block;
+  width: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+  height: 6px;
+  transform-origin: bottom;
+}
+.wave-bar.active span:nth-child(1) { animation: wave 0.9s 0.0s ease-in-out infinite alternate; }
+.wave-bar.active span:nth-child(2) { animation: wave 0.9s 0.15s ease-in-out infinite alternate; }
+.wave-bar.active span:nth-child(3) { animation: wave 0.9s 0.3s ease-in-out infinite alternate; }
+.wave-bar.active span:nth-child(4) { animation: wave 0.9s 0.15s ease-in-out infinite alternate; }
+.wave-bar.active span:nth-child(5) { animation: wave 0.9s 0.0s ease-in-out infinite alternate; }
+
+@keyframes wave {
+  from { height: 6px; }
+  to   { height: 24px; }
+}
+
+/* ── Controls ─────────────────────────────────── */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  justify-content: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: none;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.88rem;
+  border-radius: 100px;
+  transition: var(--transition);
+  outline: none;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--ink);
+  padding: 13px 24px;
+  box-shadow: 0 2px 12px rgba(28,26,23,0.1), 0 0 0 1px rgba(28,26,23,0.06);
+}
+.btn-secondary:hover:not(:disabled) {
+  background: var(--ink);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(28,26,23,0.18);
+}
+.btn-secondary:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.btn-speak {
+  background: var(--accent);
+  color: #fff;
+  padding: 15px 30px;
+  box-shadow: 0 4px 18px var(--accent-glow);
+}
+.btn-speak:hover {
+  background: #b35a22;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px var(--accent-glow);
+}
+.btn-speak:active {
+  transform: translateY(0);
+}
+
+/* ── Progress Bar ─────────────────────────────── */
+.progress-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(28,26,23,0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), #e8844a);
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 0%;
+}
+
+/* ── Responsive ───────────────────────────────── */
+@media (max-width: 480px) {
+  .card { padding: 36px 28px 32px; }
+  .step-number { font-size: 3.5rem; top: 20px; right: 24px; }
+  .btn-secondary { padding: 11px 18px; font-size: 0.82rem; }
+  .btn-speak { padding: 13px 22px; }
+}
